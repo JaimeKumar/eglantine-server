@@ -15,10 +15,10 @@ app.post("/payment", cors(), async (req, res) => {
         const payment = await stripe.paymentIntents.create({
             amount: amount,
             currency: "GBP",
-            automatic_payment_methods: {enabled: true}
-            // description: "Eglantine Clothing",
-            // payment_method: id,
-            // confirm: true
+            // automatic_payment_methods: {enabled: true}
+            description: "Eglantine Clothing",
+            payment_method: id,
+            confirm: true
         })
         console.log(payment)
         res.json({
