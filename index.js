@@ -9,29 +9,29 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.post("/payment", cors(), async (req, res) => {
-    let {amount, id, conf} = req.body
+// app.use(express.static("public"));
+// app.use(express.json());
+
+app.post("/getSecret", cors(), async (req, res) => {
+    let {amount, conf} = req.body
     try {
         const payment = await stripe.paymentIntents.create({
             amount: amount,
             currency: "GBP",
             description: conf,
-            
+
             automatic_payment_methods: {
                 enabled: true,
             }
-            // payment_method: id,
-            // confirm: true
         })
         console.log(payment)
         res.json({
-            message: "Payment successful",
-            success: true
+            success: true,
+            clientSecret: payment.client_secret
         })
     } catch (error) {
         console.log(error)
         res.json({
-            message: "Payment failed",
             success: false
         })
     }
