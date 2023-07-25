@@ -10,12 +10,12 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.post("/payment", cors(), async (req, res) => {
-    let {amount, id, description} = req.body
+    let {amount, id, conf} = req.body
     try {
         const payment = await stripe.paymentIntents.create({
             amount: amount,
             currency: "GBP",
-            description: description,
+            description: conf,
             payment_method: id,
             confirm: true
         })
