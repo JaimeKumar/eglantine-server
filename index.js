@@ -4,7 +4,7 @@ require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET)
 const bodyParser = require("body-parser")
 const cors = require("cors")
-const uuid = require('short-uuid')
+const short = require('short-uuid')
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -15,7 +15,7 @@ app.use(cors())
 
 app.post("/createIntent", cors(), async (req, res) => {
     let {amount} = req.body
-    let conf = uuid();
+    let conf = short.uuid();
     console.log(conf);
     try {
         const payment = await stripe.paymentIntents.create({
