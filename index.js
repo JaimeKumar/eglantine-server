@@ -4,7 +4,7 @@ require("dotenv").config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET)
 const bodyParser = require("body-parser")
 const cors = require("cors")
-import { v4 as uuid } from 'uuid';
+const uuid = require('short-uuid')
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
