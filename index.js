@@ -16,8 +16,12 @@ app.post("/payment", cors(), async (req, res) => {
             amount: amount,
             currency: "GBP",
             description: conf,
-            payment_method: id,
-            confirm: true
+            
+            automatic_payment_methods: {
+                enabled: true,
+            }
+            // payment_method: id,
+            // confirm: true
         })
         console.log(payment)
         res.json({
