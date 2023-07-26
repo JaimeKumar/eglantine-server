@@ -14,7 +14,7 @@ app.use(cors())
 // app.use(express.json());
 
 app.post("/createIntent", cors(), async (req, res) => {
-    let {amount} = req.body
+    let {amount, items} = req.body
     let conf = short.uuid();
     console.log(conf);
     try {
@@ -22,7 +22,7 @@ app.post("/createIntent", cors(), async (req, res) => {
             amount: amount,
             currency: "GBP",
             description: conf,
-
+            items: items,
             automatic_payment_methods: {
                 enabled: true,
             }
