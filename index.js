@@ -17,8 +17,7 @@ app.post("/createIntent", cors(), async (req, res) => {
     let {amount, items} = req.body
     let cart = {};
     items.forEach((item) => {
-        cart[item.id].size = item.size; 
-        cart[item.id].quantity = item.q; 
+        cart[item.id] = `${item.size} x ${item.q}`;
     })
     let conf = short.uuid();
     try {
@@ -31,7 +30,7 @@ app.post("/createIntent", cors(), async (req, res) => {
             },
             metadata: {...cart}
         })
-        console.log(payment, items)
+        console.log(payment)
         res.json({
             success: true,
             clientSecret: payment.client_secret,
