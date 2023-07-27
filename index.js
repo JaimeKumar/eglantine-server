@@ -22,12 +22,11 @@ app.post("/createIntent", cors(), async (req, res) => {
             amount: amount,
             currency: "GBP",
             description: conf,
-            items: items,
             automatic_payment_methods: {
                 enabled: true,
             }
         })
-        console.log(payment)
+        console.log(payment, items)
         res.json({
             success: true,
             clientSecret: payment.client_secret,
