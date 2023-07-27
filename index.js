@@ -15,8 +15,12 @@ app.use(cors())
 
 app.post("/createIntent", cors(), async (req, res) => {
     let {amount, items} = req.body
+    let cart = {};
+    items.forEach((item) => {
+        cart[item.id].size = item.size; 
+        cart[item.id].quantity = item.q; 
+    })
     let conf = short.uuid();
-    console.log(conf);
     try {
         const payment = await stripe.paymentIntents.create({
             amount: amount,
@@ -25,7 +29,7 @@ app.post("/createIntent", cors(), async (req, res) => {
             automatic_payment_methods: {
                 enabled: true,
             },
-            metadata: items
+            metadata: {...cart}
         })
         console.log(payment, items)
         res.json({
