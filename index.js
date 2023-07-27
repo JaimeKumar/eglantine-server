@@ -24,7 +24,8 @@ app.post("/createIntent", cors(), async (req, res) => {
             description: conf,
             automatic_payment_methods: {
                 enabled: true,
-            }
+            },
+            metadata: items
         })
         console.log(payment, items)
         res.json({
